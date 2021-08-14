@@ -14,7 +14,7 @@ export const createOrUpdateUser = async (authtoken) => {
 
 export const currentUser = async (authtoken) => {
   return await axios.post(
-    `${NEXT_PUBLIC_URL}/api/current-user`,
+    `${NEXT_PUBLIC_URL}/current-user`,
     {},
     {
       headers: {
