@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { auth } from "../../firebase";
 
-import { toast } from "../../components/notifications/Notification";
 import { createOrUpdateUser } from "../../functions/auth";
 
 import { Context } from "../../context";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 const RegisterComplete = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,15 +22,11 @@ const RegisterComplete = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      toast("error", "Email and Password is required", "Authentication Failed");
+      toast("Email and Password is required");
       return;
     }
     if (password.length < 6) {
-      toast(
-        "error",
-        "Password must be at least 6 characters",
-        "Authentication Failed"
-      );
+      toast("Password must be at least 6 characters");
       return;
     }
     try {
