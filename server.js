@@ -2,7 +2,7 @@ const express = require("express");
 const next = require("next");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
-const dev = process.env.NODE_ENV !== "production";
+const dev = process.env.NODE_ENV === "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -11,14 +11,15 @@ app
   .then(() => {
     const server = express();
     // apply proxy in dev mode
-
-    server.use(
-      "/api",
-      createProxyMiddleware({
-        target: process.env.NEXT_PUBLIC_API,
-        changeOrigin: true,
-      })
-    );
+    if (dev) {
+      server.use(
+        "/api",
+        createProxyMiddleware({
+          target: process.env.NEXT_PUBLIC_API,
+          changeOrigin: true,
+        })
+      );
+    }
 
     server.all("*", (req, res) => {
       return handle(req, res);
