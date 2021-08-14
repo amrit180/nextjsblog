@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const createOrUpdateUser = async (authtoken) => {
   return await axios.post(
-    `${NEXT_PUBLIC_URL}/create-or-update-user`,
+    `${process.env.NEXT_PUBLIC_URL}/create-or-update-user`,
     {},
     {
       headers: {
@@ -14,7 +14,7 @@ export const createOrUpdateUser = async (authtoken) => {
 
 export const currentUser = async (authtoken) => {
   return await axios.post(
-    `${NEXT_PUBLIC_URL}/current-user`,
+    `${process.env.NEXT_PUBLIC_URL}/current-user`,
     {},
     {
       headers: {
